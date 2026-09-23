@@ -1,41 +1,234 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071b49"><meta name="description" content="AP TRADE HUB — Quality • Trust • Service. Electronics, online services and more.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a3d">
+<meta name="description" content="AP TRADE HUB — Quality • Trust • Service">
 <title>AP TRADE HUB | Quality • Trust • Service</title>
 <style>
-:root{--navy:#061a49;--blue:#0b3c91;--yellow:#ffd400;--red:#e52323;--ink:#101828;--muted:#667085;--bg:#f6f8fc;--card:#fff;--line:#e6eaf0;--wa:#18b95a}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-a{text-decoration:none;color:inherit}.top{background:var(--navy);color:#fff;text-align:center;padding:7px 12px;font-size:12px}.top b{color:var(--yellow)}header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 18px #071b4910}.nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 16px}.logo{width:58px;height:58px;object-fit:contain}.brand{font-weight:900;letter-spacing:.5px;color:var(--navy);font-size:20px}.tag{font-size:11px;color:#64748b}.navlinks{margin-left:auto;display:flex;gap:16px;font-size:13px;font-weight:700}.navlinks a:hover{color:var(--red)}.hero{background:radial-gradient(circle at 75% 25%,#184aa7 0,#09265f 45%,#041437 100%);color:#fff}.hero-in{max-width:1180px;margin:auto;padding:56px 18px 48px;display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:center}.eyebrow{display:inline-block;background:#ffffff15;border:1px solid #ffffff2c;border-radius:999px;padding:7px 12px;font-size:12px}.hero h1{font-size:clamp(38px,7vw,68px);line-height:.98;margin:16px 0 12px}.hero h1 span{color:var(--yellow)}.hero p{max-width:640px;color:#dbe7ff;font-size:16px;line-height:1.6}.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:var(--yellow);color:#071b49}.secondary{background:#ffffff14;color:#fff;border:1px solid #ffffff35}.hero-logo{width:min(320px,80vw);justify-self:center;filter:drop-shadow(0 20px 30px #0006)}.section{max-width:1180px;margin:auto;padding:38px 16px}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}.section h2{margin:0;font-size:30px}.section p{color:var(--muted);margin:7px 0 0}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.search{flex:1;min-width:210px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:14px}.chip{padding:10px 14px;border:1px solid var(--line);background:#fff;border-radius:999px;font-weight:700;cursor:pointer}.chip.active,.chip:hover{background:var(--navy);color:#fff;border-color:var(--navy)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.product{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 24px #0b1b3b08;display:flex;flex-direction:column}.pic{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;padding:12px;position:relative}.pic img{width:100%;height:100%;object-fit:contain}.badge{position:absolute;left:12px;top:12px;background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:6px 8px;border-radius:7px}.body{padding:15px}.cat{font-size:10px;text-transform:uppercase;color:#667085;font-weight:800;letter-spacing:.7px}.name{font-size:16px;font-weight:900;margin:6px 0;line-height:1.25}.price{font-size:22px;font-weight:900;color:var(--navy);margin:8px 0 13px}.actions{display:flex;gap:8px}.buy,.add{flex:1;padding:10px;border-radius:10px;font-weight:800;cursor:pointer;border:0}.buy{background:var(--wa);color:#fff}.add{background:#edf3ff;color:var(--navy)}.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}.feature{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:12px;color:var(--muted)}.empty{display:none;text-align:center;padding:45px;color:var(--muted);grid-column:1/-1}.cart{position:fixed;right:16px;bottom:16px;z-index:30;background:var(--navy);color:#fff;border:2px solid var(--yellow);border-radius:999px;padding:12px 17px;font-weight:900;box-shadow:0 12px 30px #0004;cursor:pointer}.cart small{background:var(--red);padding:3px 7px;border-radius:999px;margin-left:5px}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:40;align-items:end;justify-content:center}.modal.show{display:flex}.sheet{width:min(560px,100%);background:#fff;border-radius:22px 22px 0 0;padding:22px;max-height:82vh;overflow:auto}.sheet h3{margin:0 0 12px}.cart-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.cart-row img{width:55px;height:55px;object-fit:contain;border:1px solid var(--line);border-radius:10px}.cart-row div:nth-child(2){flex:1}.qty button{border:1px solid var(--line);background:#fff;border-radius:6px;width:28px;height:28px}.sheet-actions{display:flex;gap:10px;margin-top:16px}.close{background:#eee}.wa{background:var(--wa);color:#fff;flex:1}.footer{background:var(--navy);color:#dbe7ff;padding:38px 16px}.foot{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot b{color:#fff}.foot .yellow{color:var(--yellow)}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hero-in{grid-template-columns:1fr}.hero-logo{order:-1;width:210px}.features{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:10px}.section{padding:30px 10px}.body{padding:11px}.name{font-size:14px}.price{font-size:19px}.actions{flex-direction:column}.hero-in{padding:40px 16px}.features{grid-template-columns:1fr 1fr}}
+:root{
+  --navy:#071a3d; --blue:#0b3b82; --yellow:#ffd400; --red:#e53935;
+  --ink:#14213d; --muted:#687386; --bg:#f5f7fb; --card:#fff;
+  --shadow:0 12px 30px rgba(7,26,61,.10); --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.topbar{background:#06142f;color:#fff;font-size:13px;padding:8px 5%;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid #e7ebf2}
+.nav{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{width:54px;height:54px;object-fit:contain;border-radius:50%}
+.brand strong{font-size:20px;letter-spacing:.4px;color:var(--navy)}
+.brand small{display:block;color:var(--muted);font-size:11px}
+.navlinks{display:flex;gap:18px;margin-left:auto;font-weight:700;font-size:14px}
+.navlinks a:hover{color:var(--red)}
+.cartBtn{border:0;background:var(--navy);color:#fff;border-radius:13px;padding:11px 14px;cursor:pointer;font-weight:800}
+.cartCount{background:var(--yellow);color:#111;border-radius:999px;padding:2px 7px;margin-left:4px}
+.hero{max-width:1180px;margin:22px auto;padding:0 18px}
+.heroBox{border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#06142f 0%,#0b3b82 55%,#173e78 100%);color:#fff;position:relative;padding:52px 42px;box-shadow:var(--shadow)}
+.heroBox:after{content:"";position:absolute;width:280px;height:280px;border:45px solid rgba(255,212,0,.16);border-radius:50%;right:-80px;top:-100px}
+.hero h1{font-size:clamp(34px,6vw,62px);line-height:1;margin:0 0 14px}
+.hero h1 span{color:var(--yellow)}
+.hero p{max-width:680px;color:#dbe6fb;font-size:17px;line-height:1.6}
+.badges{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
+.badge{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);padding:8px 12px;border-radius:999px;font-weight:700;font-size:13px}
+.heroBtns{display:flex;gap:10px;flex-wrap:wrap}
+.primary,.secondary{border:0;border-radius:13px;padding:13px 18px;font-weight:900;cursor:pointer}
+.primary{background:var(--yellow);color:#111}
+.secondary{background:#fff;color:var(--navy)}
+main{max-width:1180px;margin:auto;padding:0 18px 50px}
+.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 16px}
+.sectionHead h2{margin:0;font-size:27px}
+.sectionHead p{margin:5px 0 0;color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.search{flex:1;min-width:220px;border:1px solid #dbe1eb;background:#fff;border-radius:13px;padding:13px 15px;outline:none}
+.search:focus{border-color:#0b3b82;box-shadow:0 0 0 3px rgba(11,59,130,.08)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{border:1px solid #d8deea;background:#fff;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;color:#42506a}
+.filter.active,.filter:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid #edf0f5;display:flex;flex-direction:column}
+.pic{height:210px;background:#fff;position:relative;display:flex;align-items:center;justify-content:center;padding:14px}
+.pic img{width:100%;height:100%;object-fit:contain}
+.tag{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;border-radius:9px;padding:6px 8px;font-size:11px;font-weight:900}
+.info{padding:16px}
+.cat{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#7b879b;font-weight:900}
+.info h3{font-size:17px;margin:7px 0 10px;min-height:42px}
+.price{font-size:21px;font-weight:950;color:var(--navy);margin-bottom:12px}
+.actions{display:flex;gap:8px}
+.add{flex:1;border:0;border-radius:11px;background:var(--navy);color:#fff;padding:11px 8px;font-weight:900;cursor:pointer}
+.wa{border:0;border-radius:11px;background:#16a34a;color:#fff;padding:11px 13px;font-weight:900;cursor:pointer}
+.empty{text-align:center;padding:40px;background:#fff;border-radius:18px;color:var(--muted);grid-column:1/-1}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.feature{background:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.feature b{display:block;margin-bottom:6px}
+.feature span{color:var(--muted);font-size:14px;line-height:1.5}
+footer{background:var(--navy);color:#fff;margin-top:20px}
+.footerInner{max-width:1180px;margin:auto;padding:30px 18px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}
+footer p,footer small{color:#bdc8dd;line-height:1.6}
+.footerTitle{font-weight:950;font-size:20px}
+.floatWa{position:fixed;right:18px;bottom:18px;z-index:60;background:#16a34a;color:#fff;border-radius:999px;padding:14px 18px;box-shadow:0 10px 25px rgba(22,163,74,.35);font-weight:950}
+.drawer{position:fixed;inset:0;z-index:100;display:none;background:rgba(0,0,0,.45)}
+.drawer.open{display:block}
+.panel{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:#fff;padding:20px;display:flex;flex-direction:column}
+.panelHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px}
+.close{border:0;background:#eef1f6;border-radius:10px;padding:8px 11px;cursor:pointer}
+.cartItems{flex:1;overflow:auto;padding:12px 0}
+.cartItem{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #edf0f4}
+.cartItem img{width:60px;height:60px;object-fit:contain;border:1px solid #eee;border-radius:10px}
+.qty{display:flex;align-items:center;gap:7px;margin-top:6px}
+.qty button{border:0;background:#edf1f6;border-radius:7px;width:26px;height:26px;cursor:pointer}
+.cartFoot{border-top:1px solid #eee;padding-top:15px}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:950;margin-bottom:12px}
+.orderBtn{width:100%;border:0;border-radius:13px;background:#16a34a;color:#fff;padding:14px;font-weight:950;cursor:pointer}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.navlinks{display:none}}
+@media(max-width:650px){.grid{grid-template-columns:repeat(2,1fr);gap:11px}.pic{height:170px}.info{padding:12px}.info h3{font-size:15px}.price{font-size:18px}.heroBox{padding:36px 24px}.features,.footerInner{grid-template-columns:1fr}.topbar{font-size:11px}.brand img{width:46px;height:46px}}
 </style>
 </head>
 <body>
-<div class="top">🚚 Local & Online Service • <b>WhatsApp Orders: +91 94361 15560</b></div>
-<header><div class="nav"><img class="logo" src="logo.png" alt="AP Trade Hub logo"><div><div class="brand">AP TRADE HUB</div><div class="tag">Quality • Trust • Service</div></div><nav class="navlinks"><a href="#products">Products</a><a href="#services">Services</a><a href="#contact">Contact</a></nav></div></header>
-<section class="hero"><div class="hero-in"><div><span class="eyebrow">ONLINE SERVICE • ELECTRONICS • SERVICES</span><h1>Build Today.<br><span>For A Better Tomorrow.</span></h1><p>Shop electronics, vintage radios and useful everyday products from AP TRADE HUB. Select your products and send your order directly on WhatsApp.</p><div class="cta"><a class="btn primary" href="#products">🛒 Shop Catalogue</a><a class="btn secondary" href="https://wa.me/919436115560?text=Hello%20AP%20TRADE%20HUB%2C%20I%20want%20to%20know%20about%20your%20products." target="_blank">💬 WhatsApp Us</a></div></div><img class="hero-logo" src="logo.png" alt="AP Trade Hub"></div></section>
-<section class="section" id="products"><div class="section-head"><div><h2>🛍️ Product Catalogue</h2><p>Real products • Clear prices • WhatsApp ordering</p></div></div><div class="controls"><input id="search" class="search" placeholder="Search products…"><button class="chip active" data-cat="All">All</button><button class="chip" data-cat="Speakers">Speakers</button><button class="chip" data-cat="Vintage Radios">Vintage Radios</button><button class="chip" data-cat="Portable Radios">Portable Radios</button></div><div id="grid" class="grid"></div><div id="empty" class="empty">No matching products found.</div></section>
-<section class="section" id="services"><div class="section-head"><div><h2>Why AP TRADE HUB?</h2><p>Simple shopping, direct communication and service-focused support.</p></div></div><div class="features"><div class="feature">🛒 <b>Easy Ordering</b><span>Add products and order through WhatsApp.</span></div><div class="feature">💬 <b>Direct Support</b><span>Talk directly with AP TRADE HUB.</span></div><div class="feature">💰 <b>Clear Pricing</b><span>Catalogue prices shown upfront.</span></div><div class="feature">🤝 <b>Trust & Service</b><span>Quality • Trust • Service</span></div></div></section>
-<footer class="footer" id="contact"><div class="foot"><div><b>AP TRADE HUB</b><br><span class="yellow">Quality • Trust • Service</span><br><small>Online Service • Electronics • Services • Fireworks</small></div><div><b>Contact</b><br>WhatsApp: +91 94361 15560<br><a href="https://wa.me/919436115560" target="_blank">Chat on WhatsApp →</a></div><div><b>Catalogue</b><br>Bluetooth Speakers<br>Vintage Radios<br>Portable Radios</div></div></footer>
-<button class="cart" id="cartBtn">🛒 Cart <small id="count">0</small></button>
-<div class="modal" id="modal"><div class="sheet"><h3>Your Cart</h3><div id="cartList"></div><div id="total" style="font-weight:900;font-size:20px;margin-top:14px"></div><div class="sheet-actions"><button class="btn close" id="close">Close</button><button class="btn wa" id="order">💬 Order on WhatsApp</button></div></div></div>
+<div class="topbar">
+  <span>🏪 AP TRADE HUB — Quality • Trust • Service</span>
+  <span>📲 WhatsApp: +91 9436115560</span>
+</div>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#home">
+      <img src="logo.png" alt="AP Trade Hub logo">
+      <div><strong>AP TRADE HUB</strong><small>ONLINE SERVICE • ELECTRONICS • SERVICES • FIREWORKS</small></div>
+    </a>
+    <nav class="navlinks">
+      <a href="#products">Products</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cartBtn" onclick="openCart()">🛒 Cart <span class="cartCount" id="cartCount">0</span></button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="heroBox">
+    <h1>AP <span>TRADE HUB</span></h1>
+    <p>Your convenient online destination for selected electronics and everyday service products. Browse the catalogue, add items to your cart, and send your order directly on WhatsApp.</p>
+    <div class="badges">
+      <span class="badge">✓ Quality</span><span class="badge">✓ Trust</span><span class="badge">✓ Service</span><span class="badge">📦 Easy Ordering</span>
+    </div>
+    <div class="heroBtns">
+      <a class="primary" href="#products">🛍️ Shop Products</a>
+      <a class="secondary" href="https://wa.me/919436115560?text=Hello%20AP%20TRADE%20HUB%2C%20I%20want%20to%20know%20about%20your%20products." target="_blank">💬 WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<section id="products">
+  <div class="sectionHead">
+    <div><h2>Featured Catalogue</h2><p>Choose a product and order directly on WhatsApp.</p></div>
+  </div>
+  <div class="toolbar">
+    <input class="search" id="search" placeholder="🔎 Search products..." oninput="renderProducts()">
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="why">
+  <div class="sectionHead"><div><h2>Why AP TRADE HUB?</h2><p>A simple, direct and mobile-friendly shopping experience.</p></div></div>
+  <div class="features">
+    <div class="feature">🛍️ <b>Simple Catalogue</b><span>Browse products with clear pricing and category filters.</span></div>
+    <div class="feature">💬 <b>WhatsApp Ordering</b><span>Send your selected products and cart total directly to WhatsApp.</span></div>
+    <div class="feature">📱 <b>Mobile Friendly</b><span>Designed to work comfortably on phones, tablets and desktops.</span></div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="footerInner">
+    <div><div class="footerTitle">AP TRADE HUB</div><p>Quality • Trust • Service</p><small>ONLINE SERVICE • ELECTRONICS • SERVICES • FIREWORKS</small></div>
+    <div><b>Contact</b><p>WhatsApp<br>+91 9436115560</p></div>
+    <div><b>Quick Links</b><p><a href="#products">Products</a><br><a href="#why">Why Us</a><br><a href="#home">Back to top ↑</a></p></div>
+  </div>
+</footer>
+
+<a class="floatWa" href="https://wa.me/919436115560?text=Hello%20AP%20TRADE%20HUB%2C%20I%20want%20to%20place%20an%20order." target="_blank">💬 Order on WhatsApp</a>
+
+<div class="drawer" id="drawer" onclick="if(event.target===this)closeCart()">
+  <aside class="panel">
+    <div class="panelHead"><h2 style="margin:0">Your Cart</h2><button class="close" onclick="closeCart()">✕</button></div>
+    <div class="cartItems" id="cartItems"></div>
+    <div class="cartFoot">
+      <div class="total"><span>Total</span><span id="cartTotal">₹0</span></div>
+      <button class="orderBtn" onclick="orderCart()">💬 Order Cart on WhatsApp</button>
+    </div>
+  </aside>
+</div>
+
 <script>
-const products=[
-{id:1,name:'Bluetooth Speaker',price:399,cat:'Speakers',img:'bluetooth-speaker.jpg',badge:'BEST SELLER'},
-{id:2,name:'PRUNUS J-120 Vintage Radio',price:4499,cat:'Vintage Radios',img:'prunus-j120.jpg'},
-{id:3,name:'NOISYBOX Vintage Radio',price:4999,cat:'Vintage Radios',img:'noizzy-retro-xxl.jpg',badge:'FEATURED'},
-{id:4,name:'PRUNUS J-711 Portable Radio',price:1699,cat:'Portable Radios',img:'prunus-j711.jpg'},
-{id:5,name:'SONY ICF-F12S 3 Band Radio',price:2399,cat:'Portable Radios',img:'sony-icf-f12s.jpg'}
+const products = [
+  {id:1,name:"Bluetooth Speaker",price:399,cat:"Speakers",img:"bluetooth-speaker.jpg",tag:"BEST VALUE"},
+  {id:2,name:"PRUNUS J-120 Vintage Radio",price:4499,cat:"Radios",img:"prunus-j120.jpg",tag:"POPULAR"},
+  {id:3,name:"NOISYBOX Vintage Radio",price:4999,cat:"Radios",img:"noizzy-retro-xxl.jpg",tag:"FEATURED"},
+  {id:4,name:"PRUNUS J-711 Portable Radio",price:1699,cat:"Radios",img:"prunus-j711.jpg",tag:"PORTABLE"},
+  {id:5,name:"SONY ICF-F12S 3 Band Radio",price:2399,cat:"Radios",img:"sony-icf-f12s.jpg",tag:"3 BAND"}
 ];
-let cat='All',query='',cart=[];
-const grid=document.getElementById('grid'),empty=document.getElementById('empty');
-function money(n){return '₹'+n.toLocaleString('en-IN')}
-function render(){let list=products.filter(p=>(cat==='All'||p.cat===cat)&&p.name.toLowerCase().includes(query.toLowerCase()));grid.innerHTML=list.map(p=>`<article class="product"><div class="pic">${p.badge?`<span class="badge">${p.badge}</span>`:''}<img src="${p.img}" alt="${p.name}" loading="lazy"></div><div class="body"><div class="cat">${p.cat}</div><div class="name">${p.name}</div><div class="price">${money(p.price)}</div><div class="actions"><button class="add" onclick="add(${p.id})">+ Add</button><button class="buy" onclick="buy(${p.id})">WhatsApp</button></div></div></article>`).join('');empty.style.display=list.length?'none':'block'}
-function add(id){let x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});updateCart();}
-function buy(id){let p=products.find(x=>x.id===id);location.href='https://wa.me/919436115560?text='+encodeURIComponent(`Hello AP TRADE HUB! I want to order:\n• ${p.name} — ${money(p.price)}\n\nPlease confirm availability and delivery details.`)}
-function updateCart(){document.getElementById('count').textContent=cart.reduce((s,i)=>s+i.qty,0)}
-function showCart(){const list=document.getElementById('cartList');if(!cart.length){list.innerHTML='<p>Your cart is empty.</p>';document.getElementById('total').textContent='';return}let total=0;list.innerHTML=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.qty;return `<div class="cart-row"><img src="${p.img}"><div><b>${p.name}</b><br>${money(p.price)} × ${i.qty}</div><div class="qty"><button onclick="chg(${p.id},-1)">−</button> ${i.qty} <button onclick="chg(${p.id},1)">+</button></div></div>`}).join('');document.getElementById('total').textContent='Total: '+money(total)}
-function chg(id,d){let x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);updateCart();showCart()}
-document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');cat=b.dataset.cat;render()});document.getElementById('search').oninput=e=>{query=e.target.value;render()};document.getElementById('cartBtn').onclick=()=>{showCart();document.getElementById('modal').classList.add('show')};document.getElementById('close').onclick=()=>document.getElementById('modal').classList.remove('show');document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')document.getElementById('modal').classList.remove('show')};document.getElementById('order').onclick=()=>{if(!cart.length)return;let total=0,lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.qty;return `• ${p.name} — ${money(p.price)} × ${i.qty}`}).join('\n');location.href='https://wa.me/919436115560?text='+encodeURIComponent(`Hello AP TRADE HUB! I want to place an order:\n${lines}\n\nTotal: ${money(total)}\n\nPlease confirm availability and delivery details.`)};
-render();
-</script></body></html>
+
+let activeCat="All";
+let cart = JSON.parse(localStorage.getItem("apTradeCart") || "[]");
+
+const money = n => "₹" + n.toLocaleString("en-IN");
+
+function categories(){
+  const cats=["All",...new Set(products.map(p=>p.cat))];
+  document.getElementById("filters").innerHTML=cats.map(c=>`<button class="filter ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+}
+function setCat(c){activeCat=c;categories();renderProducts()}
+function renderProducts(){
+  const q=document.getElementById("search").value.trim().toLowerCase();
+  const list=products.filter(p=>(activeCat==="All"||p.cat===activeCat)&&p.name.toLowerCase().includes(q));
+  document.getElementById("grid").innerHTML=list.length?list.map(p=>`
+    <article class="card">
+      <div class="pic"><span class="tag">${p.tag}</span><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="info"><div class="cat">${p.cat}</div><h3>${p.name}</h3><div class="price">${money(p.price)}</div>
+      <div class="actions"><button class="add" onclick="addCart(${p.id})">🛒 Add</button><button class="wa" onclick="orderOne(${p.id})">WA</button></div></div>
+    </article>`).join(""):`<div class="empty">No matching products found.</div>`;
+}
+function addCart(id){
+  const p=products.find(x=>x.id===id); const item=cart.find(x=>x.id===id);
+  if(item)item.qty++; else cart.push({id,qty:1});
+  save(); openCart();
+}
+function save(){localStorage.setItem("apTradeCart",JSON.stringify(cart));updateCartCount();renderCart()}
+function updateCartCount(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function renderCart(){
+  const box=document.getElementById("cartItems");
+  if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.<br><br>Add a product to get started.</div>';document.getElementById("cartTotal").textContent="₹0";return}
+  let total=0;
+  box.innerHTML=cart.map(item=>{
+    const p=products.find(x=>x.id===item.id); total+=p.price*item.qty;
+    return `<div class="cartItem"><img src="${p.img}" alt=""><div><b>${p.name}</b><div>${money(p.price)}</div><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${item.qty}</span><button onclick="changeQty(${p.id},1)">+</button></div></div><button class="close" onclick="removeItem(${p.id})">✕</button></div>`
+  }).join("");
+  document.getElementById("cartTotal").textContent=money(total);
+}
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);save()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);save()}
+function openCart(){document.getElementById("drawer").classList.add("open");renderCart()}
+function closeCart(){document.getElementById("drawer").classList.remove("open")}
+function orderOne(id){
+  const p=products.find(x=>x.id===id);
+  const text=`Hello AP TRADE HUB,%0A%0AI want to order:%0A• ${encodeURIComponent(p.name)} — ${money(p.price)}%0A%0APlease share availability and delivery details.`;
+  window.open("https://wa.me/919436115560?text="+text,"_blank");
+}
+function orderCart(){
+  if(!cart.length){alert("Your cart is empty.");return}
+  let total=0, lines=cart.map(item=>{const p=products.find(x=>x.id===item.id);total+=p.price*item.qty;return `• ${p.name} × ${item.qty} — ${money(p.price*item.qty)}`}).join("%0A");
+  const text=`Hello AP TRADE HUB,%0A%0AI want to place this order:%0A${lines}%0A%0A*Estimated Total: ${money(total)}*%0A%0APlease confirm availability and delivery details.`;
+  window.open("https://wa.me/919436115560?text="+text,"_blank");
+}
+categories();renderProducts();updateCartCount();renderCart();
+</script>
+</body>
+</html>
