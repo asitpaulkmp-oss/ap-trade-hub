@@ -47,7 +47,7 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 </div></section>
 
 <main id="products">
-  <div class="head"><div><h2>Featured Products</h2><p>Easy catalogue • products are managed from products.json</p></div></div>
+  <div class="head"><div><h2>Featured Products</h2><p>V7 catalogue • quoted prices include ₹399 margin</p></div></div>
   <div class="toolbar"><input id="search" class="search" placeholder="🔎 Search products..." oninput="render()"><div class="filters" id="filters"></div></div>
   <div class="note">💡 <b>Pricing formula:</b> market reference price + ₹399 margin, then quoted at the nearest price ending in <b>49</b> or <b>99</b>. Prices are reference-based and can change with availability, offers, GST, shipping or stock.</div>
   <div class="grid" id="grid"></div>
@@ -55,7 +55,7 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
   <section id="about" class="features">
     <div class="feature"><b>💬 WhatsApp Orders</b><span>Send a ready-made order message with product name, quantity and total directly to AP TRADE HUB.</span></div>
     <div class="feature"><b>💰 Transparent Quote</b><span>Each listed quote is built from a current web market reference plus the requested ₹399 margin and price-ending rule.</span></div>
-    <div class="feature"><b>📱 Product Catalogue</b><span>Add or edit products in products.json — no need to edit index.html.</span></div>
+    <div class="feature"><b>📱 Product Catalogue</b><span>Search and filter by Earbuds, Power Banks, Speakers, Chargers, Radios and Smartphones.</span></div>
   </section>
 </main>
 
@@ -78,21 +78,7 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 </div>
 
 <script>
-let products = [];
-async function loadProducts(){
-  try{
-    const res = await fetch("products.json");
-    if(!res.ok) throw new Error("products.json not found");
-    products = await res.json();
-    renderFilters();
-    render();
-    updateCart();
-  }catch(err){
-    console.error(err);
-    document.getElementById("grid").innerHTML =
-      '<div class="empty">Catalogue could not be loaded. Please check products.json.</div>';
-  }
-}
+const products = [{"id": "redmi-buds", "name": "Redmi Buds 6", "cat": "Earbuds", "cost": 2799, "price": 3199, "img": "https://softech.kg/image/cache/catalog/Products/Acsessuary/Xiaomi/Naushniki/Buds%206%20EU/1-800x800.jpg", "badge": "POPULAR", "desc": "49dB ANC • Dual drivers • Up to 42H playback"}, {"id": "redmi-buds-generic", "name": "Redmi Buds 5A", "cat": "Earbuds", "cost": 1299, "price": 1699, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-buds-5a/m/9e4a8a3b0d7c1b4b7d7c5a1a1e6f3f8a.png", "badge": "VALUE", "desc": "Redmi TWS earbuds • ANC • compact charging case"}, {"id": "redmi-powerbank", "name": "Redmi 10000mAh Power Bank", "cat": "Power Banks", "cost": 799, "price": 1199, "img": "https://static-01.daraz.pk/p/e33378c39bfc6c53bdec0d81261d1032.jpg", "badge": "BEST VALUE", "desc": "10000mAh • Portable • Fast charging"}, {"id": "redmi-speaker", "name": "Xiaomi Sound Outdoor Speaker", "cat": "Speakers", "cost": 3999, "price": 4399, "img": "https://furper.com/cdn/shop/files/Redmi-Bluetooth-Portable-Speaker-Waterproof-Bluetooth-5.3-5-Hours-Battery.jpg", "badge": "FEATURED", "desc": "Portable Bluetooth speaker • Outdoor audio"}, {"id": "charger-combo", "name": "Xiaomi 22.5W Fast Charger + Cable", "cat": "Chargers", "cost": 1999, "price": 2399, "img": "https://i01.appmifile.com/webfile/globalimg/xm_event/in/92ab68f83ff3f0c51340dff07d8ede66.jpg", "badge": "FAST CHARGE", "desc": "22.5W charger + USB cable combo"}, {"id": "tecsun", "name": "TECSUN PL-310ET Radio", "cat": "Radios", "cost": 20991, "price": 21399, "img": "https://cdn.freewebstore.com/origin/217539/1463127219263_pl310et-black-frontview-aco.jpg", "badge": "RADIO PICK", "desc": "FM • MW • LW • SW • ETM • DSP receiver"}, {"id": "xdata", "name": "XHDATA D-808 Radio", "cat": "Radios", "cost": 7781, "price": 8199, "img": "https://m.media-amazon.com/images/I/81njpOh-QVL._AC_SL1500_.jpg", "badge": "SHORTWAVE", "desc": "FM • SW • MW • LW • SSB • Air Band • RDS"}, {"id": "qodosen", "name": "QODOSEN DX-286 Radio", "cat": "Radios", "cost": 11999, "price": 12399, "img": "https://32661891.s21i.faimallusr.com/2/ABUIABACGAAg-szztAYo9LawygQwygc42AQ.jpg", "badge": "DX RADIO", "desc": "TEF6686 • FM/LW/MW/SW • RDS • 1000 presets"}, {"id": "iphone17", "name": "Apple iPhone 17 256GB Black", "cat": "Smartphones", "cost": 99900, "price": 100299, "img": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-black-202609?fmt=png-alpha&wid=800&hei=1000", "badge": "APPLE", "desc": "256GB • Black • 5G • A19 chip"}, {"id": "iphone17pm", "name": "Apple iPhone 17 Pro Max 256GB Cosmic Orange", "cat": "Smartphones", "cost": 149900, "price": 150299, "img": "https://cdn.movertix.com/media/catalog/product/cache/image/1200x/i/p/iphone-17-pro-max-cosmic-orange-1tb_1_1.jpg", "badge": "PREMIUM", "desc": "256GB • Cosmic Orange • Pro Max"}, {"id": "note15", "name": "Redmi Note 15 Pro+ 5G 256GB Carbon Black", "cat": "Smartphones", "cost": 39999, "price": 40399, "img": "https://m.media-amazon.com/images/I/61VbLazO0wL._AC_SL1500_.jpg", "badge": "5G", "desc": "8GB + 256GB • Carbon Black • 5G"}, {"id": "note13", "name": "Redmi Note 13 Pro 5G 256GB Arctic White", "cat": "Smartphones", "cost": 19999, "price": 20399, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-13-pro-5g/M/8b4c4a4a4b0c4f4d9f8b8e7e6d5c4b3a.png", "badge": "STOCK PICK", "desc": "8GB + 256GB • Arctic White • 5G"}];
 const WA = "919436115560";
 let cart = JSON.parse(localStorage.getItem("apTradeCartV7") || "[]");
 let activeCat = "All";
@@ -121,7 +107,7 @@ function openCart(){document.getElementById("drawer").classList.add("open");upda
 function closeCart(){document.getElementById("drawer").classList.remove("open")}
 function checkout(){if(!cart.length){toast("Cart is empty");return}let total=0;let lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);total+=p.price*x.qty;return `• ${p.name} × ${x.qty} = ${money(p.price*x.qty)}`}).join("%0A");const text=`Hello AP TRADE HUB,%0A%0AI want to place an order:%0A${lines}%0A%0ATotal: ${money(total)}%0A%0APlease confirm availability, delivery charge and final order amount.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank")}
 function toast(msg){const t=document.createElement("div");t.textContent="✓ "+msg;t.style.cssText="position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#071a3d;color:#fff;padding:12px 16px;border-radius:99px;z-index:200;font-weight:800;box-shadow:0 10px 25px rgba(0,0,0,.2)";document.body.appendChild(t);setTimeout(()=>t.remove(),1800)}
-loadProducts();
+renderFilters();render();updateCart();
 </script>
 </body>
 </html>
