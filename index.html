@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071a3d">
 <meta name="description" content="AP TRADE HUB — Quality • Trust • Service">
-<title>AP TRADE HUB V8 | Google Sheet CSV Catalogue</title>
+<title>AP TRADE HUB V7 | Quality • Trust • Service</title>
 <style>
 :root{--navy:#071a3d;--blue:#0b3b82;--yellow:#ffd400;--red:#e53935;--green:#16a34a;--bg:#f5f7fb;--ink:#14213d;--muted:#6b7484;--card:#fff;--shadow:0 12px 30px rgba(7,26,61,.10);--r:20px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input{font:inherit}a{color:inherit;text-decoration:none}
@@ -47,7 +47,7 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 </div></section>
 
 <main id="products">
-  <div class="head"><div><h2>Featured Products</h2><p>V7 catalogue • quoted prices include ₹399 margin</p></div></div>
+  <div class="head"><div><h2>Featured Products</h2><p>Easy catalogue • products are managed from products.json</p></div></div>
   <div class="toolbar"><input id="search" class="search" placeholder="🔎 Search products..." oninput="render()"><div class="filters" id="filters"></div></div>
   <div class="note">💡 <b>Pricing formula:</b> market reference price + ₹399 margin, then quoted at the nearest price ending in <b>49</b> or <b>99</b>. Prices are reference-based and can change with availability, offers, GST, shipping or stock.</div>
   <div class="grid" id="grid"></div>
@@ -55,7 +55,7 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
   <section id="about" class="features">
     <div class="feature"><b>💬 WhatsApp Orders</b><span>Send a ready-made order message with product name, quantity and total directly to AP TRADE HUB.</span></div>
     <div class="feature"><b>💰 Transparent Quote</b><span>Each listed quote is built from a current web market reference plus the requested ₹399 margin and price-ending rule.</span></div>
-    <div class="feature"><b>📱 Product Catalogue</b><span>Search and filter by Earbuds, Power Banks, Speakers, Chargers, Radios, Smartphones and Fireworks.</span></div>
+    <div class="feature"><b>📱 Product Catalogue</b><span>Add or edit products in products.json — no need to edit index.html.</span></div>
   </section>
 </main>
 
@@ -77,64 +77,50 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
   </div>
 </div>
 
-<script src="config.js"></script>
 <script>
 let products = [];
+async function loadProducts(){
+  try{
+    const res = await fetch("products.json");
+    if(!res.ok) throw new Error("products.json not found");
+    products = await res.json();
+    renderFilters();
+    render();
+    updateCart();
+  }catch(err){
+    console.error(err);
+    document.getElementById("grid").innerHTML =
+      '<div class="empty">Catalogue could not be loaded. Please check products.json.</div>';
+  }
+}
 const WA = "919436115560";
-let cart = JSON.parse(localStorage.getItem("apTradeCartV8") || "[]");
+let cart = JSON.parse(localStorage.getItem("apTradeCartV7") || "[]");
 let activeCat = "All";
 
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function imgTag(p){const fallback = p.id+"-fallback.svg"; return `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">`}
-function categories(){return ["All",...new Set(products.map(p=>p.cat).filter(Boolean))]}
+function categories(){return ["All",...new Set(products.map(p=>p.cat))]}
 function renderFilters(){document.getElementById("filters").innerHTML=categories().map(c=>`<button class="filter ${c===activeCat?'active':''}" onclick="activeCat='${c}';renderFilters();render()">${c}</button>`).join("")}
 function render(){
   const q=(document.getElementById("search").value||"").toLowerCase().trim();
   const list=products.filter(p=>(activeCat==="All"||p.cat===activeCat)&&(!q||(p.name+" "+p.cat+" "+p.desc).toLowerCase().includes(q)));
   document.getElementById("grid").innerHTML=list.length?list.map(p=>`
     <article class="card">
-      <div class="pic">${imgTag(p)}<span class="tag">${p.badge||""}</span></div>
+      <div class="pic">${imgTag(p)}<span class="tag">${p.badge}</span></div>
       <div class="info"><div class="cat">${p.cat}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div><div class="price">${money(p.price)}</div>
       <div class="actions"><button class="add" onclick="add('${p.id}')">Add to Cart</button><button class="wa" onclick="orderOne('${p.id}')">WhatsApp</button></div></div>
     </article>`).join(""):`<div class="empty">No products found. Try another search.</div>`;
 }
-function add(id){const p=products.find(x=>x.id===id);if(!p)return;const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});save();toast(p.name+" added to cart");}
-function orderOne(id){const p=products.find(x=>x.id===id);if(!p)return;const text=`Hello AP TRADE HUB,%0A%0AI want to order:%0A• ${p.name}%0A• Qty: 1%0A• Quoted Price: ${money(p.price)}%0A%0APlease confirm availability and delivery.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank")}
-function save(){localStorage.setItem("apTradeCartV8",JSON.stringify(cart));updateCart()}
-function updateCart(){document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);const box=document.getElementById("items");if(!cart.length){box.innerHTML='<div style="text-align:center;color:#777;padding:40px 10px">Your cart is empty.</div>';document.getElementById("total").textContent="₹0";return}let total=0;box.innerHTML=cart.map(x=>{const p=products.find(y=>y.id===x.id);if(!p)return '';total+=p.price*x.qty;return `<div class="item"><img src="${p.img}" onerror="this.onerror=null;this.src='${p.id}-fallback.svg'"><div><b>${p.name}</b><div>${money(p.price)} × ${x.qty}</div><div class="qty"><button onclick="change('${p.id}',-1)">−</button><span>${x.qty}</span><button onclick="change('${p.id}',1)">+</button></div></div><button class="close" onclick="removeItem('${p.id}')">🗑</button></div>`}).join("");document.getElementById("total").textContent=money(total)}
+function add(id){const p=products.find(x=>x.id===id);const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});save();toast(p.name+" added to cart");}
+function orderOne(id){const p=products.find(x=>x.id===id);const text=`Hello AP TRADE HUB,%0A%0AI want to order:%0A• ${p.name}%0A• Qty: 1%0A• Quoted Price: ${money(p.price)}%0A%0APlease confirm availability and delivery.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank");}
+function save(){localStorage.setItem("apTradeCartV7",JSON.stringify(cart));updateCart();}
+function updateCart(){document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);const box=document.getElementById("items");if(!cart.length){box.innerHTML='<div style="text-align:center;color:#777;padding:40px 10px">Your cart is empty.</div>';document.getElementById("total").textContent="₹0";return}let total=0;box.innerHTML=cart.map(x=>{const p=products.find(y=>y.id===x.id);total+=p.price*x.qty;return `<div class="item"><img src="${p.img}" onerror="this.onerror=null;this.src='${p.id}-fallback.svg'"><div><b>${p.name}</b><div>${money(p.price)} × ${x.qty}</div><div class="qty"><button onclick="change('${p.id}',-1)">−</button><span>${x.qty}</span><button onclick="change('${p.id}',1)">+</button></div></div><button class="close" onclick="removeItem('${p.id}')">🗑</button></div>`}).join("");document.getElementById("total").textContent=money(total)}
 function change(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save()}
 function removeItem(id){cart=cart.filter(i=>i.id!==id);save()}
 function openCart(){document.getElementById("drawer").classList.add("open");updateCart()}
 function closeCart(){document.getElementById("drawer").classList.remove("open")}
-function checkout(){if(!cart.length){toast("Cart is empty");return}let total=0;let lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);if(!p)return '';total+=p.price*x.qty;return `• ${p.name} × ${x.qty} = ${money(p.price*x.qty)}`}).filter(Boolean).join("%0A");const text=`Hello AP TRADE HUB,%0A%0AI want to place an order:%0A${lines}%0A%0ATotal: ${money(total)}%0A%0APlease confirm availability, delivery charge and final order amount.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank")}
+function checkout(){if(!cart.length){toast("Cart is empty");return}let total=0;let lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);total+=p.price*x.qty;return `• ${p.name} × ${x.qty} = ${money(p.price*x.qty)}`}).join("%0A");const text=`Hello AP TRADE HUB,%0A%0AI want to place an order:%0A${lines}%0A%0ATotal: ${money(total)}%0A%0APlease confirm availability, delivery charge and final order amount.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank")}
 function toast(msg){const t=document.createElement("div");t.textContent="✓ "+msg;t.style.cssText="position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#071a3d;color:#fff;padding:12px 16px;border-radius:99px;z-index:200;font-weight:800;box-shadow:0 10px 25px rgba(0,0,0,.2)";document.body.appendChild(t);setTimeout(()=>t.remove(),1800)}
-function parseCSV(text){
-  const rows=[]; let row=[], cell="", quoted=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i], n=text[i+1];
-    if(quoted){if(c==='"'&&n==='"'){cell+='"';i++;}else if(c==='"'){quoted=false;}else cell+=c;}
-    else if(c==='"'&&cell===''){quoted=true;}
-    else if(c===','){row.push(cell);cell="";}
-    else if(c==='\n'){row.push(cell);rows.push(row);row=[];cell="";}
-    else if(c==='\r'){if(n==='\n'){}else{row.push(cell);rows.push(row);row=[];cell="";} }
-    else cell+=c;
-  }
-  if(cell!==""||row.length){row.push(cell);rows.push(row);}
-  if(!rows.length)return [];
-  const headers=rows[0].map(h=>h.replace(/^\uFEFF/,"").trim());
-  return rows.slice(1).filter(r=>r.some(x=>x.trim()!=="")).map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??"").trim()])));
-}
-function normalize(rows){return rows.map(p=>({...p,cost:Number(p.cost||0),price:Number(p.price||0)})).filter(p=>p.id&&p.name&&p.cat)}
-async function loadProducts(){
-  try{
-    const source=(typeof CATALOG_CSV_URL!=="undefined"&&CATALOG_CSV_URL.trim())?CATALOG_CSV_URL.trim():"products.csv";
-    const res=await fetch(source,{cache:"no-store"});
-    if(!res.ok)throw new Error("CSV not found");
-    products=normalize(parseCSV(await res.text()));
-    if(!products.length)throw new Error("CSV has no products");
-    renderFilters();render();updateCart();
-  }catch(err){document.getElementById("grid").innerHTML=`<div class="empty">Could not load the catalogue CSV. Check <b>config.js</b> and your Google Sheets Published CSV URL.</div>`;console.error(err)}
-}
 loadProducts();
 </script>
 </body>
