@@ -12,8 +12,8 @@ a{text-decoration:none;color:inherit}.top{background:var(--navy);color:#fff;text
 </head>
 <body>
 <div class="top">🚚 Local & Online Service • <b>WhatsApp Orders: +91 94361 15560</b></div>
-<header><div class="nav"><img class="logo" src="assets/logo.png" alt="AP Trade Hub logo"><div><div class="brand">AP TRADE HUB</div><div class="tag">Quality • Trust • Service</div></div><nav class="navlinks"><a href="#products">Products</a><a href="#services">Services</a><a href="#contact">Contact</a></nav></div></header>
-<section class="hero"><div class="hero-in"><div><span class="eyebrow">ONLINE SERVICE • ELECTRONICS • SERVICES</span><h1>Build Today.<br><span>For A Better Tomorrow.</span></h1><p>Shop electronics, vintage radios and useful everyday products from AP TRADE HUB. Select your products and send your order directly on WhatsApp.</p><div class="cta"><a class="btn primary" href="#products">🛒 Shop Catalogue</a><a class="btn secondary" href="https://wa.me/919436115560?text=Hello%20AP%20TRADE%20HUB%2C%20I%20want%20to%20know%20about%20your%20products." target="_blank">💬 WhatsApp Us</a></div></div><img class="hero-logo" src="assets/logo.png" alt="AP Trade Hub"></div></section>
+<header><div class="nav"><img class="logo" src="logo.png" alt="AP Trade Hub logo"><div><div class="brand">AP TRADE HUB</div><div class="tag">Quality • Trust • Service</div></div><nav class="navlinks"><a href="#products">Products</a><a href="#services">Services</a><a href="#contact">Contact</a></nav></div></header>
+<section class="hero"><div class="hero-in"><div><span class="eyebrow">ONLINE SERVICE • ELECTRONICS • SERVICES</span><h1>Build Today.<br><span>For A Better Tomorrow.</span></h1><p>Shop electronics, vintage radios and useful everyday products from AP TRADE HUB. Select your products and send your order directly on WhatsApp.</p><div class="cta"><a class="btn primary" href="#products">🛒 Shop Catalogue</a><a class="btn secondary" href="https://wa.me/919436115560?text=Hello%20AP%20TRADE%20HUB%2C%20I%20want%20to%20know%20about%20your%20products." target="_blank">💬 WhatsApp Us</a></div></div><img class="hero-logo" src="logo.png" alt="AP Trade Hub"></div></section>
 <section class="section" id="products"><div class="section-head"><div><h2>🛍️ Product Catalogue</h2><p>Real products • Clear prices • WhatsApp ordering</p></div></div><div class="controls"><input id="search" class="search" placeholder="Search products…"><button class="chip active" data-cat="All">All</button><button class="chip" data-cat="Speakers">Speakers</button><button class="chip" data-cat="Vintage Radios">Vintage Radios</button><button class="chip" data-cat="Portable Radios">Portable Radios</button></div><div id="grid" class="grid"></div><div id="empty" class="empty">No matching products found.</div></section>
 <section class="section" id="services"><div class="section-head"><div><h2>Why AP TRADE HUB?</h2><p>Simple shopping, direct communication and service-focused support.</p></div></div><div class="features"><div class="feature">🛒 <b>Easy Ordering</b><span>Add products and order through WhatsApp.</span></div><div class="feature">💬 <b>Direct Support</b><span>Talk directly with AP TRADE HUB.</span></div><div class="feature">💰 <b>Clear Pricing</b><span>Catalogue prices shown upfront.</span></div><div class="feature">🤝 <b>Trust & Service</b><span>Quality • Trust • Service</span></div></div></section>
 <footer class="footer" id="contact"><div class="foot"><div><b>AP TRADE HUB</b><br><span class="yellow">Quality • Trust • Service</span><br><small>Online Service • Electronics • Services • Fireworks</small></div><div><b>Contact</b><br>WhatsApp: +91 94361 15560<br><a href="https://wa.me/919436115560" target="_blank">Chat on WhatsApp →</a></div><div><b>Catalogue</b><br>Bluetooth Speakers<br>Vintage Radios<br>Portable Radios</div></div></footer>
@@ -21,11 +21,11 @@ a{text-decoration:none;color:inherit}.top{background:var(--navy);color:#fff;text
 <div class="modal" id="modal"><div class="sheet"><h3>Your Cart</h3><div id="cartList"></div><div id="total" style="font-weight:900;font-size:20px;margin-top:14px"></div><div class="sheet-actions"><button class="btn close" id="close">Close</button><button class="btn wa" id="order">💬 Order on WhatsApp</button></div></div></div>
 <script>
 const products=[
-{id:1,name:'Bluetooth Speaker',price:399,cat:'Speakers',img:'assets/bluetooth-speaker.jpg',badge:'BEST SELLER'},
-{id:2,name:'PRUNUS J-120 Vintage Radio',price:4499,cat:'Vintage Radios',img:'assets/prunus-j120.jpg'},
-{id:3,name:'NOISYBOX Vintage Radio',price:4999,cat:'Vintage Radios',img:'assets/noizzy-retro-xxl.jpg',badge:'FEATURED'},
-{id:4,name:'PRUNUS J-711 Portable Radio',price:1699,cat:'Portable Radios',img:'assets/prunus-j711.jpg'},
-{id:5,name:'SONY ICF-F12S 3 Band Radio',price:2399,cat:'Portable Radios',img:'assets/sony-icf-f12s.jpg'}
+{id:1,name:'Bluetooth Speaker',price:399,cat:'Speakers',img:'bluetooth-speaker.jpg',badge:'BEST SELLER'},
+{id:2,name:'PRUNUS J-120 Vintage Radio',price:4499,cat:'Vintage Radios',img:'prunus-j120.jpg'},
+{id:3,name:'NOISYBOX Vintage Radio',price:4999,cat:'Vintage Radios',img:'noizzy-retro-xxl.jpg',badge:'FEATURED'},
+{id:4,name:'PRUNUS J-711 Portable Radio',price:1699,cat:'Portable Radios',img:'prunus-j711.jpg'},
+{id:5,name:'SONY ICF-F12S 3 Band Radio',price:2399,cat:'Portable Radios',img:'sony-icf-f12s.jpg'}
 ];
 let cat='All',query='',cart=[];
 const grid=document.getElementById('grid'),empty=document.getElementById('empty');
