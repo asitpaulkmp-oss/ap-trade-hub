@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+    <rect width="800" height="600" fill="#f7f9fc"/>
+    <circle cx="400" cy="245" r="150" fill="#071a3d"/>
+    <text x="400" y="235" text-anchor="middle" fill="#ffd400" font-size="34" font-family="Arial" font-weight="700">AP TRADE HUB</text>
+    <text x="400" y="285" text-anchor="middle" fill="#fff" font-size="22" font-family="Arial">Redmi Note 13 Pro 5G 256GB Arctic White</text>
+    <text x="400" y="500" text-anchor="middle" fill="#6b7280" font-size="18" font-family="Arial">Product image • tap to order</text>
+    </svg>
