@@ -30,13 +30,21 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 .float{position:fixed;right:17px;bottom:17px;z-index:60;background:var(--green);color:#fff;border-radius:99px;padding:14px 17px;font-weight:950;box-shadow:0 10px 25px rgba(22,163,74,.35)}
 .drawer{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;display:none}.drawer.open{display:block}.panel{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:#fff;padding:18px;display:flex;flex-direction:column}.panelHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px}.close{border:0;background:#eef1f6;border-radius:10px;padding:8px 11px;cursor:pointer}.items{flex:1;overflow:auto;padding:10px 0}.item{display:grid;grid-template-columns:58px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #eee}.item img{width:58px;height:58px;object-fit:contain;background:#fafafa;border-radius:10px}.item b{font-size:13px}.item small{color:var(--muted)}.qty{display:flex;align-items:center;gap:5px;margin-top:5px}.qty button{border:1px solid #ddd;background:#fff;border-radius:7px;width:26px;height:26px;cursor:pointer}.checkout{border:0;background:var(--green);color:#fff;border-radius:13px;padding:14px;font-weight:950;cursor:pointer;width:100%}
 @media(max-width:950px){.grid{grid-template-columns:repeat(3,1fr)}.navlinks{display:none}}@media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr);gap:11px}.pic{height:185px}.features,.foot{grid-template-columns:1fr}.heroBox{padding:32px 23px}.info{padding:12px}.info h3{font-size:14px}.price{font-size:19px}.add,.wa{font-size:12px;padding:10px 7px}}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.pic{height:160px}.brand b{font-size:17px}.logo{width:45px;height:45px}}
+
+.manage{margin-top:34px}.managerBox{background:#fff;border:1px solid #e7ebf2;border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.productForm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.productForm input{border:1px solid #dbe1eb;border-radius:11px;padding:12px;outline:none}.productForm input:focus{border-color:var(--blue)}.formBtns{display:flex;gap:8px;align-items:center}.saveProduct,.cancelEdit{border:0;border-radius:11px;padding:12px 14px;font-weight:900;cursor:pointer}.saveProduct{background:var(--navy);color:#fff}.cancelEdit{background:#eef1f6;color:#26344f}.manageList{margin-top:18px;border-top:1px solid #eee}.manageRow{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #eee}.manageRow img{width:54px;height:54px;object-fit:contain;border-radius:10px;background:#fafafa}.manageRow b{font-size:14px}.manageRow small{color:var(--muted)}.manageActions{display:flex;gap:7px}.manageActions button{border:0;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.editBtn{background:#e9f1ff}.deleteBtn{background:#ffe8e8;color:#b42318}
+@media(max-width:680px){.productForm{grid-template-columns:1fr}.manageRow{grid-template-columns:46px 1fr}.manageActions{grid-column:2}.manageRow img{width:46px;height:46px}}
+
+
+.adminArea{margin-top:34px}.adminBox{background:#fff;border:1px solid #e7ebf2;border-radius:20px;padding:18px;box-shadow:var(--shadow)}.adminLogin{display:flex;gap:10px;flex-wrap:wrap}.adminLogin input{flex:1;min-width:210px;border:1px solid #dbe1eb;border-radius:11px;padding:12px}.adminLogin button,.adminBar button{border:0;border-radius:11px;padding:12px 16px;background:var(--navy);color:#fff;font-weight:900;cursor:pointer}.securityNote{display:block;color:var(--muted);margin-top:10px;line-height:1.5}.adminBar{display:flex;justify-content:space-between;align-items:center;background:#eef8f1;border:1px solid #bfe4ca;border-radius:14px;padding:12px 14px;margin-bottom:12px}.adminBar button{background:var(--red)}
+
 </style>
 </head>
 <body>
 <div class="top"><span>🏪 AP TRADE HUB • Quality • Trust • Service</span><span>📲 WhatsApp: +91 9436115560</span></div>
 <header><div class="nav">
   <a class="brand" href="#"><img class="logo" src="logo.png" alt="AP Trade Hub logo"><span><b>AP TRADE HUB</b><small>Online Service • Electronics • Services • Fireworks</small></span></a>
-  <nav class="navlinks"><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <nav class="navlinks"><a href="#products">Products</a><a href="#about">About</a><a href="#admin">🔐 Admin</a><a href="#contact">Contact</a></nav>
   <button class="cartBtn" onclick="openCart()">🛒 Cart <span class="count" id="count">0</span></button>
 </div></header>
 
@@ -57,6 +65,42 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
     <div class="feature"><b>💰 Transparent Quote</b><span>Each listed quote is built from a current web market reference plus the requested ₹399 margin and price-ending rule.</span></div>
     <div class="feature"><b>📱 Product Catalogue</b><span>Search and filter by Earbuds, Power Banks, Speakers, Chargers, Radios and Smartphones.</span></div>
   </section>
+
+<section id="manage" class="manage" style="display:none">
+  <div class="head"><div><h2>Product Manager</h2><p>Admin-only: add, edit or delete products.</p></div></div>
+  <div class="managerBox">
+    <form id="productForm" class="productForm">
+      <input type="hidden" id="editId">
+      <input id="pName" placeholder="Product name" required>
+      <input id="pCat" placeholder="Category (e.g. Earbuds)" required>
+      <input id="pCost" type="number" min="0" placeholder="Cost / market price" required>
+      <input id="pPrice" type="number" min="0" placeholder="Selling price" required>
+      <input id="pImg" placeholder="Product image URL" required>
+      <input id="pBadge" placeholder="Badge (NEW / HOT / VALUE)" value="NEW">
+      <input id="pDesc" placeholder="Short description" required>
+      <div class="formBtns"><button class="saveProduct" type="submit">➕ Save Product</button><button class="cancelEdit" id="cancelEdit" type="button" style="display:none">Cancel</button></div>
+    </form>
+    <div id="manageList" class="manageList"></div>
+  </div>
+</section>
+
+
+<section id="admin" class="adminArea">
+  <div class="head"><div><h2>🔐 Admin Panel</h2><p>Product management is available only after admin login.</p></div></div>
+  <div class="adminBox" id="adminLoginBox">
+    <form id="adminLoginForm" class="adminLogin">
+      <input id="adminUser" autocomplete="username" placeholder="Admin username" required>
+      <input id="adminPass" type="password" autocomplete="current-password" placeholder="Admin password" required>
+      <button type="submit">🔐 Login</button>
+    </form>
+    <small class="securityNote">Demo frontend login for this static Test 3 build. For a real public store, use server-side authentication before deployment.</small>
+  </div>
+  <div id="adminPanel" style="display:none">
+    <div class="adminBar"><b>✅ Admin mode active</b><button id="logoutBtn">Logout</button></div>
+    <div id="adminManageMount"></div>
+  </div>
+</section>
+
 </main>
 
 <footer id="contact"><div class="foot">
@@ -78,7 +122,9 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 </div>
 
 <script>
-const products = [{"id": "redmi-buds", "name": "Redmi Buds 6", "cat": "Earbuds", "cost": 2799, "price": 3199, "img": "https://softech.kg/image/cache/catalog/Products/Acsessuary/Xiaomi/Naushniki/Buds%206%20EU/1-800x800.jpg", "badge": "POPULAR", "desc": "49dB ANC • Dual drivers • Up to 42H playback"}, {"id": "redmi-buds-generic", "name": "Redmi Buds 5A", "cat": "Earbuds", "cost": 1299, "price": 1699, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-buds-5a/m/9e4a8a3b0d7c1b4b7d7c5a1a1e6f3f8a.png", "badge": "VALUE", "desc": "Redmi TWS earbuds • ANC • compact charging case"}, {"id": "redmi-powerbank", "name": "Redmi 10000mAh Power Bank", "cat": "Power Banks", "cost": 799, "price": 1199, "img": "https://static-01.daraz.pk/p/e33378c39bfc6c53bdec0d81261d1032.jpg", "badge": "BEST VALUE", "desc": "10000mAh • Portable • Fast charging"}, {"id": "redmi-speaker", "name": "Xiaomi Sound Outdoor Speaker", "cat": "Speakers", "cost": 3999, "price": 4399, "img": "https://furper.com/cdn/shop/files/Redmi-Bluetooth-Portable-Speaker-Waterproof-Bluetooth-5.3-5-Hours-Battery.jpg", "badge": "FEATURED", "desc": "Portable Bluetooth speaker • Outdoor audio"}, {"id": "charger-combo", "name": "Xiaomi 22.5W Fast Charger + Cable", "cat": "Chargers", "cost": 1999, "price": 2399, "img": "https://i01.appmifile.com/webfile/globalimg/xm_event/in/92ab68f83ff3f0c51340dff07d8ede66.jpg", "badge": "FAST CHARGE", "desc": "22.5W charger + USB cable combo"}, {"id": "tecsun", "name": "TECSUN PL-310ET Radio", "cat": "Radios", "cost": 20991, "price": 21399, "img": "https://cdn.freewebstore.com/origin/217539/1463127219263_pl310et-black-frontview-aco.jpg", "badge": "RADIO PICK", "desc": "FM • MW • LW • SW • ETM • DSP receiver"}, {"id": "xdata", "name": "XHDATA D-808 Radio", "cat": "Radios", "cost": 7781, "price": 8199, "img": "https://m.media-amazon.com/images/I/81njpOh-QVL._AC_SL1500_.jpg", "badge": "SHORTWAVE", "desc": "FM • SW • MW • LW • SSB • Air Band • RDS"}, {"id": "qodosen", "name": "QODOSEN DX-286 Radio", "cat": "Radios", "cost": 11999, "price": 12399, "img": "https://32661891.s21i.faimallusr.com/2/ABUIABACGAAg-szztAYo9LawygQwygc42AQ.jpg", "badge": "DX RADIO", "desc": "TEF6686 • FM/LW/MW/SW • RDS • 1000 presets"}, {"id": "iphone17", "name": "Apple iPhone 17 256GB Black", "cat": "Smartphones", "cost": 99900, "price": 100299, "img": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-black-202609?fmt=png-alpha&wid=800&hei=1000", "badge": "APPLE", "desc": "256GB • Black • 5G • A19 chip"}, {"id": "iphone17pm", "name": "Apple iPhone 17 Pro Max 256GB Cosmic Orange", "cat": "Smartphones", "cost": 149900, "price": 150299, "img": "https://cdn.movertix.com/media/catalog/product/cache/image/1200x/i/p/iphone-17-pro-max-cosmic-orange-1tb_1_1.jpg", "badge": "PREMIUM", "desc": "256GB • Cosmic Orange • Pro Max"}, {"id": "note15", "name": "Redmi Note 15 Pro+ 5G 256GB Carbon Black", "cat": "Smartphones", "cost": 39999, "price": 40399, "img": "https://m.media-amazon.com/images/I/61VbLazO0wL._AC_SL1500_.jpg", "badge": "5G", "desc": "8GB + 256GB • Carbon Black • 5G"}, {"id": "note13", "name": "Redmi Note 13 Pro 5G 256GB Arctic White", "cat": "Smartphones", "cost": 19999, "price": 20399, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-13-pro-5g/M/8b4c4a4a4b0c4f4d9f8b8e7e6d5c4b3a.png", "badge": "STOCK PICK", "desc": "8GB + 256GB • Arctic White • 5G"}];
+const defaultProducts = [{"id": "redmi-buds", "name": "Redmi Buds 6", "cat": "Earbuds", "cost": 2799, "price": 3199, "img": "https://softech.kg/image/cache/catalog/Products/Acsessuary/Xiaomi/Naushniki/Buds%206%20EU/1-800x800.jpg", "badge": "POPULAR", "desc": "49dB ANC • Dual drivers • Up to 42H playback"}, {"id": "redmi-buds-generic", "name": "Redmi Buds 5A", "cat": "Earbuds", "cost": 1299, "price": 1699, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-buds-5a/m/9e4a8a3b0d7c1b4b7d7c5a1a1e6f3f8a.png", "badge": "VALUE", "desc": "Redmi TWS earbuds • ANC • compact charging case"}, {"id": "redmi-powerbank", "name": "Redmi 10000mAh Power Bank", "cat": "Power Banks", "cost": 799, "price": 1199, "img": "https://static-01.daraz.pk/p/e33378c39bfc6c53bdec0d81261d1032.jpg", "badge": "BEST VALUE", "desc": "10000mAh • Portable • Fast charging"}, {"id": "redmi-speaker", "name": "Xiaomi Sound Outdoor Speaker", "cat": "Speakers", "cost": 3999, "price": 4399, "img": "https://furper.com/cdn/shop/files/Redmi-Bluetooth-Portable-Speaker-Waterproof-Bluetooth-5.3-5-Hours-Battery.jpg", "badge": "FEATURED", "desc": "Portable Bluetooth speaker • Outdoor audio"}, {"id": "charger-combo", "name": "Xiaomi 22.5W Fast Charger + Cable", "cat": "Chargers", "cost": 1999, "price": 2399, "img": "https://i01.appmifile.com/webfile/globalimg/xm_event/in/92ab68f83ff3f0c51340dff07d8ede66.jpg", "badge": "FAST CHARGE", "desc": "22.5W charger + USB cable combo"}, {"id": "tecsun", "name": "TECSUN PL-310ET Radio", "cat": "Radios", "cost": 20991, "price": 21399, "img": "https://cdn.freewebstore.com/origin/217539/1463127219263_pl310et-black-frontview-aco.jpg", "badge": "RADIO PICK", "desc": "FM • MW • LW • SW • ETM • DSP receiver"}, {"id": "xdata", "name": "XHDATA D-808 Radio", "cat": "Radios", "cost": 7781, "price": 8199, "img": "https://m.media-amazon.com/images/I/81njpOh-QVL._AC_SL1500_.jpg", "badge": "SHORTWAVE", "desc": "FM • SW • MW • LW • SSB • Air Band • RDS"}, {"id": "qodosen", "name": "QODOSEN DX-286 Radio", "cat": "Radios", "cost": 11999, "price": 12399, "img": "https://32661891.s21i.faimallusr.com/2/ABUIABACGAAg-szztAYo9LawygQwygc42AQ.jpg", "badge": "DX RADIO", "desc": "TEF6686 • FM/LW/MW/SW • RDS • 1000 presets"}, {"id": "iphone17", "name": "Apple iPhone 17 256GB Black", "cat": "Smartphones", "cost": 99900, "price": 100299, "img": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-black-202609?fmt=png-alpha&wid=800&hei=1000", "badge": "APPLE", "desc": "256GB • Black • 5G • A19 chip"}, {"id": "iphone17pm", "name": "Apple iPhone 17 Pro Max 256GB Cosmic Orange", "cat": "Smartphones", "cost": 149900, "price": 150299, "img": "https://cdn.movertix.com/media/catalog/product/cache/image/1200x/i/p/iphone-17-pro-max-cosmic-orange-1tb_1_1.jpg", "badge": "PREMIUM", "desc": "256GB • Cosmic Orange • Pro Max"}, {"id": "note15", "name": "Redmi Note 15 Pro+ 5G 256GB Carbon Black", "cat": "Smartphones", "cost": 39999, "price": 40399, "img": "https://m.media-amazon.com/images/I/61VbLazO0wL._AC_SL1500_.jpg", "badge": "5G", "desc": "8GB + 256GB • Carbon Black • 5G"}, {"id": "note13", "name": "Redmi Note 13 Pro 5G 256GB Arctic White", "cat": "Smartphones", "cost": 19999, "price": 20399, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-13-pro-5g/M/8b4c4a4a4b0c4f4d9f8b8e7e6d5c4b3a.png", "badge": "STOCK PICK", "desc": "8GB + 256GB • Arctic White • 5G"}];
+const PRODUCT_KEY = "apTradeProductsV7Test2";
+let products = JSON.parse(localStorage.getItem(PRODUCT_KEY) || "null") || defaultProducts;
 const WA = "919436115560";
 let cart = JSON.parse(localStorage.getItem("apTradeCartV7") || "[]");
 let activeCat = "All";
@@ -107,7 +153,110 @@ function openCart(){document.getElementById("drawer").classList.add("open");upda
 function closeCart(){document.getElementById("drawer").classList.remove("open")}
 function checkout(){if(!cart.length){toast("Cart is empty");return}let total=0;let lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);total+=p.price*x.qty;return `• ${p.name} × ${x.qty} = ${money(p.price*x.qty)}`}).join("%0A");const text=`Hello AP TRADE HUB,%0A%0AI want to place an order:%0A${lines}%0A%0ATotal: ${money(total)}%0A%0APlease confirm availability, delivery charge and final order amount.`;window.open("https://wa.me/"+WA+"?text="+text,"_blank")}
 function toast(msg){const t=document.createElement("div");t.textContent="✓ "+msg;t.style.cssText="position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#071a3d;color:#fff;padding:12px 16px;border-radius:99px;z-index:200;font-weight:800;box-shadow:0 10px 25px rgba(0,0,0,.2)";document.body.appendChild(t);setTimeout(()=>t.remove(),1800)}
+
+function saveProducts(){localStorage.setItem(PRODUCT_KEY,JSON.stringify(products));}
+function slugify(s){return s.toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "product";}
+function uniqueId(base){let id=base,n=2;while(products.some(p=>p.id===id)){id=base+"-"+n++;}return id;}
+function renderManager(){
+  const box=document.getElementById("manageList");
+  box.innerHTML=products.map(p=>`
+    <div class="manageRow">
+      <img src="${p.img}" alt="" onerror="this.onerror=null;this.src='${p.id}-fallback.svg'">
+      <div><b>${p.name}</b><br><small>${p.cat} • ${money(p.price)}</small></div>
+      <div class="manageActions"><button class="editBtn" onclick="editProduct('${p.id}')">✏️ Edit</button><button class="deleteBtn" onclick="deleteProduct('${p.id}')">🗑 Delete</button></div>
+    </div>`).join("");
+}
+function resetForm(){
+  document.getElementById("productForm").reset();
+  document.getElementById("editId").value="";
+  document.getElementById("pBadge").value="NEW";
+  document.getElementById("cancelEdit").style.display="none";
+  document.querySelector(".saveProduct").textContent="➕ Save Product";
+}
+function editProduct(id){
+  const p=products.find(x=>x.id===id); if(!p)return;
+  document.getElementById("editId").value=p.id;
+  document.getElementById("pName").value=p.name;
+  document.getElementById("pCat").value=p.cat;
+  document.getElementById("pCost").value=p.cost;
+  document.getElementById("pPrice").value=p.price;
+  document.getElementById("pImg").value=p.img;
+  document.getElementById("pBadge").value=p.badge||"NEW";
+  document.getElementById("pDesc").value=p.desc;
+  document.getElementById("cancelEdit").style.display="inline-block";
+  document.querySelector(".saveProduct").textContent="💾 Update Product";
+  document.getElementById("manage").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function deleteProduct(id){
+  const p=products.find(x=>x.id===id); if(!p)return;
+  if(!confirm("Delete "+p.name+"?"))return;
+  products=products.filter(x=>x.id!==id);
+  cart=cart.filter(x=>x.id!==id);
+  saveProducts();save();renderFilters();render();renderManager();toast("Product deleted");
+}
+document.getElementById("productForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const editId=document.getElementById("editId").value;
+  const name=document.getElementById("pName").value.trim();
+  const cat=document.getElementById("pCat").value.trim();
+  const cost=Number(document.getElementById("pCost").value);
+  const price=Number(document.getElementById("pPrice").value);
+  const img=document.getElementById("pImg").value.trim();
+  const badge=document.getElementById("pBadge").value.trim()||"NEW";
+  const desc=document.getElementById("pDesc").value.trim();
+  if(editId){
+    const p=products.find(x=>x.id===editId);
+    if(p)Object.assign(p,{name,cat,cost,price,img,badge,desc});
+    toast("Product updated");
+  }else{
+    products.push({id:uniqueId(slugify(name)),name,cat,cost,price,img,badge,desc});
+    toast("Product added");
+  }
+  saveProducts();renderFilters();render();renderManager();resetForm();
+});
+document.getElementById("cancelEdit").addEventListener("click",resetForm);
+
 renderFilters();render();updateCart();
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "APTRADE2026";
+let adminLoggedIn = sessionStorage.getItem("apTradeAdminV7Test3") === "1";
+
+function showAdminState(){
+  document.getElementById("adminLoginBox").style.display=adminLoggedIn?"none":"block";
+  document.getElementById("adminPanel").style.display=adminLoggedIn?"block":"none";
+  if(adminLoggedIn){
+    const mount=document.getElementById("adminManageMount");
+    const manage=document.getElementById("manage");
+    if(manage && manage.parentElement!==mount) mount.appendChild(manage);
+    manage.style.display="block";
+    renderManager();
+  }
+}
+document.getElementById("adminLoginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const u=document.getElementById("adminUser").value.trim();
+  const p=document.getElementById("adminPass").value;
+  if(u===ADMIN_USER && p===ADMIN_PASS){
+    adminLoggedIn=true;
+    sessionStorage.setItem("apTradeAdminV7Test3","1");
+    document.getElementById("adminPass").value="";
+    showAdminState();
+    toast("Admin login successful");
+  }else{
+    toast("Invalid admin credentials");
+  }
+});
+document.getElementById("logoutBtn").addEventListener("click",()=>{
+  adminLoggedIn=false;
+  sessionStorage.removeItem("apTradeAdminV7Test3");
+  document.getElementById("adminManageMount").innerHTML="";
+  document.getElementById("manage").style.display="none";
+  document.getElementById("adminPanel").style.display="none";
+  document.getElementById("adminLoginBox").style.display="block";
+  toast("Logged out");
+});
+
+showAdminState();
 </script>
 </body>
 </html>
