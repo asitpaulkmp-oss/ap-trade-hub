@@ -35,6 +35,25 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
 .productForm{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.productForm input{border:1px solid #dbe1eb;border-radius:11px;padding:12px;outline:none}.productForm input:focus{border-color:var(--blue)}.formBtns{display:flex;gap:8px;align-items:center}.saveProduct,.cancelEdit{border:0;border-radius:11px;padding:12px 14px;font-weight:900;cursor:pointer}.saveProduct{background:var(--navy);color:#fff}.cancelEdit{background:#eef1f6;color:#26344f}.manageList{margin-top:18px;border-top:1px solid #eee}.manageRow{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #eee}.manageRow img{width:54px;height:54px;object-fit:contain;border-radius:10px;background:#fafafa}.manageRow b{font-size:14px}.manageRow small{color:var(--muted)}.manageActions{display:flex;gap:7px}.manageActions button{border:0;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.editBtn{background:#e9f1ff}.deleteBtn{background:#ffe8e8;color:#b42318}
 @media(max-width:680px){.productForm{grid-template-columns:1fr}.manageRow{grid-template-columns:46px 1fr}.manageActions{grid-column:2}.manageRow img{width:46px;height:46px}}
 
+
+.adminLocked #manage > .managerBox{display:none}
+.adminLockBar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid #e7ebf2;border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.adminLockBar small{color:#6b7484}
+.adminUnlockBtn{border:0;background:#071a3d;color:#fff;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer}
+.adminLogoutBtn{border:0;background:#ffe8e8;color:#b42318;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer;display:none}
+.adminModal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:center;justify-content:center;padding:18px}
+.adminModal.open{display:flex}
+.adminModalCard{width:min(390px,100%);background:#fff;border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.adminModalCard h3{margin:0 0 8px;color:#071a3d}
+.adminModalCard p{margin:0 0 15px;color:#6b7484;font-size:13px;line-height:1.5}
+.adminPassword{width:100%;border:1px solid #dbe1eb;border-radius:11px;padding:12px;outline:none;margin-bottom:10px}
+.adminPassword:focus{border-color:#0b3b82}
+.adminModalBtns{display:flex;gap:8px}
+.adminModalBtns button{flex:1;border:0;border-radius:11px;padding:12px;font-weight:900;cursor:pointer}
+.adminLoginBtn{background:#071a3d;color:#fff}
+.adminCancelBtn{background:#eef1f6;color:#26344f}
+.adminError{color:#b42318;font-size:12px;min-height:18px;margin-bottom:6px}
+
 </style>
 </head>
 <body>
@@ -63,8 +82,15 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
     <div class="feature"><b>📱 Product Catalogue</b><span>Search and filter by Earbuds, Power Banks, Speakers, Chargers, Radios and Smartphones.</span></div>
   </section>
 
-<section id="manage" class="manage">
-  <div class="head"><div><h2>Product Manager</h2><p>Add, edit or delete products without touching the code.</p></div></div>
+<section id="manage" class="manage adminLocked">
+  <div class="head"><div><h2>🔐 Product Manager</h2><p>Admin access required to add, edit or delete products.</p></div></div>
+  <div class="adminLockBar">
+    <div><b id="adminStatus">🔒 Admin Panel Locked</b><br><small id="adminHint">Enter the admin password to manage products.</small></div>
+    <div>
+      <button class="adminUnlockBtn" id="adminUnlockBtn" type="button" onclick="openAdminLogin()">🔑 Unlock Admin</button>
+      <button class="adminLogoutBtn" id="adminLogoutBtn" type="button" onclick="lockAdmin()">🔒 Lock</button>
+    </div>
+  </div>
   <div class="managerBox">
     <form id="productForm" class="productForm">
       <input type="hidden" id="editId">
@@ -101,6 +127,20 @@ footer{background:var(--navy);color:#fff}.foot{max-width:1180px;margin:auto;padd
   </div>
 </div>
 
+
+<div class="adminModal" id="adminModal" onclick="if(event.target===this)closeAdminLogin()">
+  <div class="adminModalCard">
+    <h3>🔐 Admin Login</h3>
+    <p>Enter the password to unlock the AP TRADE HUB Product Manager.</p>
+    <input class="adminPassword" id="adminPassword" type="password" autocomplete="current-password" placeholder="Admin password">
+    <div class="adminError" id="adminError"></div>
+    <div class="adminModalBtns">
+      <button class="adminCancelBtn" type="button" onclick="closeAdminLogin()">Cancel</button>
+      <button class="adminLoginBtn" type="button" onclick="unlockAdmin()">Unlock</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const defaultProducts = [{"id": "redmi-buds", "name": "Redmi Buds 6", "cat": "Earbuds", "cost": 2799, "price": 3199, "img": "https://softech.kg/image/cache/catalog/Products/Acsessuary/Xiaomi/Naushniki/Buds%206%20EU/1-800x800.jpg", "badge": "POPULAR", "desc": "49dB ANC • Dual drivers • Up to 42H playback"}, {"id": "redmi-buds-generic", "name": "Redmi Buds 5A", "cat": "Earbuds", "cost": 1299, "price": 1699, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-buds-5a/m/9e4a8a3b0d7c1b4b7d7c5a1a1e6f3f8a.png", "badge": "VALUE", "desc": "Redmi TWS earbuds • ANC • compact charging case"}, {"id": "redmi-powerbank", "name": "Redmi 10000mAh Power Bank", "cat": "Power Banks", "cost": 799, "price": 1199, "img": "https://static-01.daraz.pk/p/e33378c39bfc6c53bdec0d81261d1032.jpg", "badge": "BEST VALUE", "desc": "10000mAh • Portable • Fast charging"}, {"id": "redmi-speaker", "name": "Xiaomi Sound Outdoor Speaker", "cat": "Speakers", "cost": 3999, "price": 4399, "img": "https://furper.com/cdn/shop/files/Redmi-Bluetooth-Portable-Speaker-Waterproof-Bluetooth-5.3-5-Hours-Battery.jpg", "badge": "FEATURED", "desc": "Portable Bluetooth speaker • Outdoor audio"}, {"id": "charger-combo", "name": "Xiaomi 22.5W Fast Charger + Cable", "cat": "Chargers", "cost": 1999, "price": 2399, "img": "https://i01.appmifile.com/webfile/globalimg/xm_event/in/92ab68f83ff3f0c51340dff07d8ede66.jpg", "badge": "FAST CHARGE", "desc": "22.5W charger + USB cable combo"}, {"id": "tecsun", "name": "TECSUN PL-310ET Radio", "cat": "Radios", "cost": 20991, "price": 21399, "img": "https://cdn.freewebstore.com/origin/217539/1463127219263_pl310et-black-frontview-aco.jpg", "badge": "RADIO PICK", "desc": "FM • MW • LW • SW • ETM • DSP receiver"}, {"id": "xdata", "name": "XHDATA D-808 Radio", "cat": "Radios", "cost": 7781, "price": 8199, "img": "https://m.media-amazon.com/images/I/81njpOh-QVL._AC_SL1500_.jpg", "badge": "SHORTWAVE", "desc": "FM • SW • MW • LW • SSB • Air Band • RDS"}, {"id": "qodosen", "name": "QODOSEN DX-286 Radio", "cat": "Radios", "cost": 11999, "price": 12399, "img": "https://32661891.s21i.faimallusr.com/2/ABUIABACGAAg-szztAYo9LawygQwygc42AQ.jpg", "badge": "DX RADIO", "desc": "TEF6686 • FM/LW/MW/SW • RDS • 1000 presets"}, {"id": "iphone17", "name": "Apple iPhone 17 256GB Black", "cat": "Smartphones", "cost": 99900, "price": 100299, "img": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-black-202609?fmt=png-alpha&wid=800&hei=1000", "badge": "APPLE", "desc": "256GB • Black • 5G • A19 chip"}, {"id": "iphone17pm", "name": "Apple iPhone 17 Pro Max 256GB Cosmic Orange", "cat": "Smartphones", "cost": 149900, "price": 150299, "img": "https://cdn.movertix.com/media/catalog/product/cache/image/1200x/i/p/iphone-17-pro-max-cosmic-orange-1tb_1_1.jpg", "badge": "PREMIUM", "desc": "256GB • Cosmic Orange • Pro Max"}, {"id": "note15", "name": "Redmi Note 15 Pro+ 5G 256GB Carbon Black", "cat": "Smartphones", "cost": 39999, "price": 40399, "img": "https://m.media-amazon.com/images/I/61VbLazO0wL._AC_SL1500_.jpg", "badge": "5G", "desc": "8GB + 256GB • Carbon Black • 5G"}, {"id": "note13", "name": "Redmi Note 13 Pro 5G 256GB Arctic White", "cat": "Smartphones", "cost": 19999, "price": 20399, "img": "https://i02.appmifile.com/mi-com-product/fly-birds/redmi-note-13-pro-5g/M/8b4c4a4a4b0c4f4d9f8b8e7e6d5c4b3a.png", "badge": "STOCK PICK", "desc": "8GB + 256GB • Arctic White • 5G"}];
 const PRODUCT_KEY = "apTradeProductsV7Test2";
@@ -108,6 +148,56 @@ let products = JSON.parse(localStorage.getItem(PRODUCT_KEY) || "null") || defaul
 const WA = "919436115560";
 let cart = JSON.parse(localStorage.getItem("apTradeCartV7") || "[]");
 let activeCat = "All";
+const ADMIN_PASSWORD = "APTradeHub@2026";
+const ADMIN_SESSION_KEY = "apTradeAdminUnlockedV7";
+let adminUnlocked = sessionStorage.getItem(ADMIN_SESSION_KEY) === "1";
+
+function applyAdminLock(){
+  const section = document.getElementById("manage");
+  const unlock = document.getElementById("adminUnlockBtn");
+  const logout = document.getElementById("adminLogoutBtn");
+  const status = document.getElementById("adminStatus");
+  const hint = document.getElementById("adminHint");
+  if(!section)return;
+  section.classList.toggle("adminLocked", !adminUnlocked);
+  unlock.style.display = adminUnlocked ? "none" : "inline-block";
+  logout.style.display = adminUnlocked ? "inline-block" : "none";
+  status.textContent = adminUnlocked ? "🔓 Admin Panel Unlocked" : "🔒 Admin Panel Locked";
+  hint.textContent = adminUnlocked ? "You can now add, edit or delete products." : "Enter the admin password to manage products.";
+}
+
+function openAdminLogin(){
+  document.getElementById("adminModal").classList.add("open");
+  document.getElementById("adminError").textContent = "";
+  const input = document.getElementById("adminPassword");
+  input.value = "";
+  setTimeout(()=>input.focus(),50);
+}
+function closeAdminLogin(){document.getElementById("adminModal").classList.remove("open");}
+function unlockAdmin(){
+  const input = document.getElementById("adminPassword");
+  if(input.value === ADMIN_PASSWORD){
+    adminUnlocked = true;
+    sessionStorage.setItem(ADMIN_SESSION_KEY,"1");
+    closeAdminLogin();
+    applyAdminLock();
+    toast("Admin panel unlocked");
+  }else{
+    document.getElementById("adminError").textContent = "❌ Incorrect password";
+    input.select();
+  }
+}
+function lockAdmin(){
+  adminUnlocked = false;
+  sessionStorage.removeItem(ADMIN_SESSION_KEY);
+  applyAdminLock();
+  toast("Admin panel locked");
+}
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter" && document.getElementById("adminModal").classList.contains("open")) unlockAdmin();
+  if(e.key==="Escape" && document.getElementById("adminModal").classList.contains("open")) closeAdminLogin();
+});
+
 
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function imgTag(p){const fallback = p.id+"-fallback.svg"; return `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">`}
@@ -154,6 +244,7 @@ function resetForm(){
   document.querySelector(".saveProduct").textContent="➕ Save Product";
 }
 function editProduct(id){
+  if(!adminUnlocked){openAdminLogin();return;}
   const p=products.find(x=>x.id===id); if(!p)return;
   document.getElementById("editId").value=p.id;
   document.getElementById("pName").value=p.name;
@@ -168,6 +259,7 @@ function editProduct(id){
   document.getElementById("manage").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function deleteProduct(id){
+  if(!adminUnlocked){openAdminLogin();return;}
   const p=products.find(x=>x.id===id); if(!p)return;
   if(!confirm("Delete "+p.name+"?"))return;
   products=products.filter(x=>x.id!==id);
@@ -176,6 +268,7 @@ function deleteProduct(id){
 }
 document.getElementById("productForm").addEventListener("submit",e=>{
   e.preventDefault();
+  if(!adminUnlocked){openAdminLogin();return;}
   const editId=document.getElementById("editId").value;
   const name=document.getElementById("pName").value.trim();
   const cat=document.getElementById("pCat").value.trim();
@@ -196,7 +289,7 @@ document.getElementById("productForm").addEventListener("submit",e=>{
 });
 document.getElementById("cancelEdit").addEventListener("click",resetForm);
 
-renderFilters();render();updateCart();renderManager();
+renderFilters();render();updateCart();renderManager();applyAdminLock();
 </script>
 </body>
 </html>
